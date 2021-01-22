@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
 import StockList from './StockList';
 import {STOCK_DATA} from '../data'
+import Button from 'react-bootstrap/Button';
 
 const SearchStocks = (props) => {
   const [input, setInput] = useState('');
-  const [stockListDefault, setstockListDefault] = useState();
-  const [stockList, setstockList] = useState();
-
-  useEffect( () => {
-      setstockListDefault(STOCK_DATA)
-    },[]);
+  const [stockListDefault, setstockListDefault] = useState(STOCK_DATA);
+  const [stockList, setstockList] = useState([]);
 
   const updateInput = async (input) => {
      const filtered = stockListDefault.filter(stock => {
@@ -28,6 +25,13 @@ const SearchStocks = (props) => {
                 onChange={updateInput}
             />
             <StockList stockList={stockList}/>
+            {stockList.length === 1 &&
+                <div>
+                    <Button color = "green" variant="success" className="btn-primary">
+                        Add {stockList[0].ticker} To Portfolio
+                    </Button>
+                </div>
+            }
         </div>
    );
 }
