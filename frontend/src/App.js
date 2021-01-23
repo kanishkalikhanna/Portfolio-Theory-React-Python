@@ -1,5 +1,6 @@
 import './App.css';
 import SearchStocks from './components/SearchStocks';
+import MVP from './components/MVP';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
 
@@ -15,6 +16,7 @@ function App() {
     <Router>
         <div className="App">
           <Route path="/" exact component={SearchStocks} />
+          <Route path="/mvp" exact component={MVP} />
         </div>
     </Router>
   );

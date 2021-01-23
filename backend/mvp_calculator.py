@@ -11,7 +11,7 @@ def find_mvp(tickers):
         total += rnd_num
 
     for ticker in tickers:
-        stock_proportions[ticker] = str(stock_proportions[ticker] / total) + "%"
+        stock_proportions[ticker] = str(round(stock_proportions[ticker] / total, 3)) + "%"
 
     result = []
 

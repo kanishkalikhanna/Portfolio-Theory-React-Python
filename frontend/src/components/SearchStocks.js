@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import StockList from './StockList';
 import {STOCK_DATA} from '../data'
@@ -6,7 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Portfolio from './Portfolio';
 
 const SearchStocks = (props) => {
-  const [input, setInput] = useState('');
+  
+    const [input, setInput] = useState('');
   const [stockListDefault, setstockListDefault] = useState(STOCK_DATA);
   const [stockList, setstockList] = useState([]);
   const [portfolioStocks, setPortfolioStocks] = useState([]);
@@ -30,8 +31,6 @@ const SearchStocks = (props) => {
 
     let updatedPortfolio = [ ...portfolioStocks, stockList[0]]; 
     setPortfolioStocks(updatedPortfolio)
-
-    console.log(portfolioStocks)
 
     setstockList([])
     setInput('')

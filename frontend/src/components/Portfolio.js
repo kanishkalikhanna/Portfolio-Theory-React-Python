@@ -1,13 +1,24 @@
 import React from 'react';
+import {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import MVP from './MVP'; 
+import {Redirect} from 'react-router-dom';
 
-const Portfolio = ({portfolioStocks=[]}) => {
+const Portfolio = ({props, portfolioStocks=[]}) => {
 
+    const [calculatedMVP, setcalculatedMVP] = useState(false);
+    const [MVPStockProportions, setMVPStockProportions] = useState([]);
     function calculateMVP (e) {
         e.preventDefault()
         axios.post('http://localhost:5000/mvp', portfolioStocks)
-        .then(res => console.log(res.data));
+        .then(res => 
+            {
+                setcalculatedMVP(true)
+                setMVPStockProportions(res.data)
+            }
+
+        );
     }
 
     return (
@@ -25,9 +36,12 @@ const Portfolio = ({portfolioStocks=[]}) => {
         })}
         {
             portfolioStocks.length > 0 &&
-            <Button onClick = {calculateMVP}>
+            <Button onClick = {calculateMVP} >
             Calculate Minimum Variance Portfolio
             </Button>
+        }
+        {
+            calculatedMVP && <MVP MVPStockProportions = {MVPStockProportions} />
         }
 
     </div>
