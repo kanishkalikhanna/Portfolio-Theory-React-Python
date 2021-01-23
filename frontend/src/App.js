@@ -1,5 +1,9 @@
 import './App.css';
 import SearchStocks from './components/SearchStocks';
+import Navbar from './components/Navbar';
+import Portfolio from './components/Portfolio';
+import { BrowserRouter as Router, Route} from "react-router-dom";
+
 
 /**
  * 
@@ -10,9 +14,15 @@ import SearchStocks from './components/SearchStocks';
 
 function App() {
   return (
-    <div className="App">
-        <SearchStocks/>
-    </div>
+    <Router>
+        <div className="App">
+          <Navbar />
+          <Route path="/" exact component={SearchStocks} />
+          <Route path="/portfolio" component={Portfolio} />
+          {/* <Route path="/mvp" component={CreateExercise} />
+          <Route path="/orp" component={CreateUser} />    */}
+        </div>
+    </Router>
   );
 }
 

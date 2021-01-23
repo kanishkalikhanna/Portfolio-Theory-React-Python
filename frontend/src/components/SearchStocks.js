@@ -16,6 +16,13 @@ const SearchStocks = (props) => {
      setInput(input);
      setstockList(filtered);
   }
+
+  /*
+    Add the stock to portfolio list
+    remove stock from stock list default 
+  */
+  function handleAddingStock() {
+  }
 	
   return (
         <div>
@@ -27,7 +34,7 @@ const SearchStocks = (props) => {
             <StockList stockList={stockList}/>
             {stockList.length === 1 &&
                 <div>
-                    <Button color = "green" variant="success" className="btn-primary">
+                    <Button color = "green" variant="success" className="btn-primary" onClick = {handleAddingStock()}>
                         Add {stockList[0].ticker} To Portfolio
                     </Button>
                 </div>
