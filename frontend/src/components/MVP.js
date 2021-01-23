@@ -3,12 +3,12 @@ import React from 'react';
 const MVP = ({MVPStockProportions=[]}) => {
   return (
     <div>
-        <h2>MVP Proportions</h2>
+        <h4>Minimum Variance <br></br> Proportions Portfolio </h4>
         { MVPStockProportions.map((data, index) => {
             if (data) {
                 return (
                     <div key={(data, index)}>
-                        <h2>{data.ticker} : {data.proportion}</h2>
+                        <p>{data.ticker} : {data.proportion}</p>
                     </div>	
                 )	
             }

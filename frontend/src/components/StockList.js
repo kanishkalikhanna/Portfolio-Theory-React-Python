@@ -4,10 +4,10 @@ const StockList = ({stockList=[]}) => {
   return (
     <div>
         { stockList.map((data, index) => {
-            if (data && index < 10) {
+            if (data && index < 25) {
                 return (
                     <div key={(data, index)}>
-                        <h2>{data.description}</h2>
+                        <p>{data.description}</p>
                     </div>	
                 )	
             }

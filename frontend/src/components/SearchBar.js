@@ -1,10 +1,11 @@
 import React from 'react';
 
 const SearchBar = ({input:keyword, onChange:setKeyword}) => {
-  const BarStyling = {width:"20rem",background:"#F2F1F9", border:"none", padding:"0.9rem"};
+  const searchBarStyle = {width:"22rem", background:"#F2F1F9", border:"2pt", padding:"0.7rem", margin: "6%", marginTop: "14%"};
+  
   return (
     <input 
-        style={BarStyling}
+        style={searchBarStyle}
         key="random1"
         value={keyword}
         placeholder={"Search for stocks"}

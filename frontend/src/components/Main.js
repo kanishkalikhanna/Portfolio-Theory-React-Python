@@ -3,14 +3,18 @@ import SearchBar from './SearchBar';
 import StockList from './StockList';
 import {STOCK_DATA} from '../data'
 import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Portfolio from './Portfolio';
 
-const SearchStocks = (props) => {
+const Main = (props) => {
   
-    const [input, setInput] = useState('');
+  const [input, setInput] = useState('');
   const [stockListDefault, setstockListDefault] = useState(STOCK_DATA);
   const [stockList, setstockList] = useState([]);
   const [portfolioStocks, setPortfolioStocks] = useState([]);
+  const portfolioStyle = {margin: "6%", marginTop: "4%"}
+  const searchAndDisplayStocksStyle = {marginLeft: "10%", marginRight: "10%"}
+  const sideBySideRenderStyle = {display:"flex", flexDirection:"row"}
 
   const updateInput = async (input) => {
      
@@ -38,10 +42,10 @@ const SearchStocks = (props) => {
 	
   return (
       <div>
-        <h1>Add S&P 500 Stocks to your portfolio</h1>
-        <div style = {{display:"flex", flexDirection:"row"}}>
-            <div style = {{marginLeft: "15%", marginRight: "10%"}}>
-                <br></br>
+        <br></br>
+        <h3>Search and add stocks to your portfolio</h3>
+        <div style = {sideBySideRenderStyle}>
+            <div style = {searchAndDisplayStocksStyle}>
                 <SearchBar
                     input={input} 
                     onChange={updateInput}
@@ -49,16 +53,14 @@ const SearchStocks = (props) => {
                 <StockList stockList={stockList}/>
                 {stockList.length === 1 &&
                     <div>
-                        <Button onClick={handleAddingStock}>
+                        <Button variant = "success" onClick={handleAddingStock}>
                             Add {stockList[0].ticker} To Portfolio
                         </Button>
                     </div>
                 }
             </div>
-            <div style = {{marginLeft: "15%"}}>
-                <div>
-                    <Portfolio portfolioStocks = {portfolioStocks}/>
-                </div>
+            <div style = {portfolioStyle}>
+                <Portfolio portfolioStocks = {portfolioStocks}  />
             </div>
 
         </div>
@@ -66,4 +68,4 @@ const SearchStocks = (props) => {
    );
 }
 
-export default SearchStocks
+export default Main
