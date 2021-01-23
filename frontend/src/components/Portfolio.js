@@ -10,7 +10,8 @@ const Portfolio = ({props, portfolioStocks=[]}) => {
     const [calculatedMVP, setcalculatedMVP] = useState(false);
     const [MVPStockProportions, setMVPStockProportions] = useState([]);
     const MVPStyle = {marginTop: "7%"}
-    const ButtonStyle = {marginTop: "5%"}
+    const ButtonStyle = {marginTop: "5%", fontSize: "large"}
+    const portfolioStockStyle = {margin: "3%", padding: "3%", background: "#ADFF2F", color: "black"}
 
     function calculateMVP (e) {
         e.preventDefault()
@@ -27,11 +28,10 @@ const Portfolio = ({props, portfolioStocks=[]}) => {
     return (
     <div>
         <h4>S&P 500 Stock Portfolio</h4>
-        <br></br>
         { portfolioStocks.map((data, index) => {
             if (data) {
                 return (
-                    <div key={(data, index)}>
+                    <div key={(data, index)} style = {portfolioStockStyle}>
                         <h5>{data.ticker}</h5>
                     </div>	
                 )	
