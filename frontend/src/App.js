@@ -18,9 +18,6 @@ function App() {
         <div className="App">
           <Navbar />
           <Route path="/" exact component={SearchStocks} />
-          <Route path="/portfolio" component={Portfolio} />
-          {/* <Route path="/mvp" component={CreateExercise} />
-          <Route path="/orp" component={CreateUser} />    */}
         </div>
     </Router>
   );

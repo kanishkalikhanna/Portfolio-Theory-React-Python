@@ -3,11 +3,13 @@ import SearchBar from './SearchBar';
 import StockList from './StockList';
 import {STOCK_DATA} from '../data'
 import Button from 'react-bootstrap/Button';
+import Portfolio from './Portfolio';
 
 const SearchStocks = (props) => {
   const [input, setInput] = useState('');
   const [stockListDefault, setstockListDefault] = useState(STOCK_DATA);
   const [stockList, setstockList] = useState([]);
+  const [portfolioStocks, setPortfolioStocks] = useState([]);
 
   const updateInput = async (input) => {
      const filtered = stockListDefault.filter(stock => {
@@ -17,28 +19,39 @@ const SearchStocks = (props) => {
      setstockList(filtered);
   }
 
-  /*
-    Add the stock to portfolio list
-    remove stock from stock list default 
-  */
-  function handleAddingStock() {
+  function handleAddingStock(e) {
+    e.preventDefault();
+    let updatedPortfolio = [ ...portfolioStocks, stockList[0]]; 
+    setPortfolioStocks(updatedPortfolio)
+    let updatedStockListDefault = stockListDefault.filter((item) => {return item.ticker !== stockList[0].ticker});
+    setstockListDefault(updatedStockListDefault);
   }
 	
   return (
         <div>
-            <h1>Select Stocks from the S&P 500</h1>
-            <SearchBar 
-                input={input} 
-                onChange={updateInput}
-            />
-            <StockList stockList={stockList}/>
-            {stockList.length === 1 &&
+            <h1>Add S&P 500 Stocks to your portfolio</h1>
+            <div>
+            {portfolioStocks.length > 0 &&
                 <div>
-                    <Button color = "green" variant="success" className="btn-primary" onClick = {handleAddingStock()}>
-                        Add {stockList[0].ticker} To Portfolio
-                    </Button>
+                    <Portfolio portfolioStocks = {portfolioStocks}/>
                 </div>
             }
+            </div>
+            <br></br>
+            <div>
+                <SearchBar 
+                    input={input} 
+                    onChange={updateInput}
+                />
+                <StockList stockList={stockList}/>
+                {stockList.length === 1 &&
+                    <div>
+                        <Button onClick={handleAddingStock}>
+                            Add {stockList[0].ticker} To Portfolio
+                        </Button>
+                    </div>
+                }
+            </div>
         </div>
    );
 }

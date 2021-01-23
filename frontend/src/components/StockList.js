@@ -4,9 +4,9 @@ const StockList = ({stockList=[]}) => {
   return (
     <div>
         { stockList.map((data, index) => {
-            if (data && index < 30) {
+            if (data && index < 10) {
                 return (
-                    <div key={data}>
+                    <div key={(data, index)}>
                         <h2>{data.description}</h2>
                     </div>	
                 )	
