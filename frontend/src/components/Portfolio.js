@@ -2,7 +2,13 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 const Portfolio = ({portfolioStocks=[]}) => {
-  return (
+
+    function calculateMVP (e) {
+        e.preventDefault()
+        console.log("Will send request to backend to calculate mvp")
+    }
+
+    return (
     <div>
         <h1>Portfolio</h1>
         { portfolioStocks.map((data, index) => {
@@ -15,11 +21,15 @@ const Portfolio = ({portfolioStocks=[]}) => {
             }
             return null
         })}
-        <Button>
+        {
+            portfolioStocks.length > 0 &&
+            <Button onClick = {calculateMVP}>
             Calculate Minimum Variance Portfolio
-        </Button>
+            </Button>
+        }
+
     </div>
-  );
+    );
 }
 
 export default Portfolio

@@ -12,34 +12,36 @@ const SearchStocks = (props) => {
   const [portfolioStocks, setPortfolioStocks] = useState([]);
 
   const updateInput = async (input) => {
-     const filtered = stockListDefault.filter(stock => {
+     
+    const filtered = stockListDefault.filter(stock => {
       return stock.description.toLowerCase().includes(input.toLowerCase())
      })
+
      setInput(input);
      setstockList(filtered);
   }
 
   function handleAddingStock(e) {
+    
     e.preventDefault();
-    let updatedPortfolio = [ ...portfolioStocks, stockList[0]]; 
-    setPortfolioStocks(updatedPortfolio)
+    
     let updatedStockListDefault = stockListDefault.filter((item) => {return item.ticker !== stockList[0].ticker});
     setstockListDefault(updatedStockListDefault);
+
+    let updatedPortfolio = [ ...portfolioStocks, stockList[0]]; 
+    setPortfolioStocks(updatedPortfolio)
+
+    setstockList([])
+    setInput('')
   }
 	
   return (
-        <div>
-            <h1>Add S&P 500 Stocks to your portfolio</h1>
-            <div>
-            {portfolioStocks.length > 0 &&
-                <div>
-                    <Portfolio portfolioStocks = {portfolioStocks}/>
-                </div>
-            }
-            </div>
-            <br></br>
-            <div>
-                <SearchBar 
+      <div>
+        <h1>Add S&P 500 Stocks to your portfolio</h1>
+        <div style = {{display:"flex", flexDirection:"row"}}>
+            <div style = {{marginLeft: "15%", marginRight: "10%"}}>
+                <br></br>
+                <SearchBar
                     input={input} 
                     onChange={updateInput}
                 />
@@ -52,7 +54,14 @@ const SearchStocks = (props) => {
                     </div>
                 }
             </div>
+            <div style = {{marginLeft: "15%"}}>
+                <div>
+                    <Portfolio portfolioStocks = {portfolioStocks}/>
+                </div>
+            </div>
+
         </div>
+      </div>
    );
 }
 

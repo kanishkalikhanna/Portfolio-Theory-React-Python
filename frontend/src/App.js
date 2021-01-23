@@ -1,7 +1,5 @@
 import './App.css';
 import SearchStocks from './components/SearchStocks';
-import Navbar from './components/Navbar';
-import Portfolio from './components/Portfolio';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
 
@@ -16,7 +14,6 @@ function App() {
   return (
     <Router>
         <div className="App">
-          <Navbar />
           <Route path="/" exact component={SearchStocks} />
         </div>
     </Router>
