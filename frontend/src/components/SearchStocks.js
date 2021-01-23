@@ -31,6 +31,8 @@ const SearchStocks = (props) => {
     let updatedPortfolio = [ ...portfolioStocks, stockList[0]]; 
     setPortfolioStocks(updatedPortfolio)
 
+    console.log(portfolioStocks)
+
     setstockList([])
     setInput('')
   }

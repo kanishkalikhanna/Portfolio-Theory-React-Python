@@ -1,11 +1,13 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 const Portfolio = ({portfolioStocks=[]}) => {
 
     function calculateMVP (e) {
         e.preventDefault()
-        console.log("Will send request to backend to calculate mvp")
+        axios.post('http://localhost:5000/mvp', portfolioStocks)
+        .then(res => console.log(res.data));
     }
 
     return (
