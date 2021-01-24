@@ -1,6 +1,6 @@
 import pandas_datareader.data as web
 import numpy as np
-import pandas as pd
+from scipy.optimize import minimize
 
 
 def calc_annual_return(mean_daily_returns, weights):
@@ -23,7 +23,7 @@ def get_json_results(mvp, tickers):
     json_results = []
 
     for i in range(n):
-        percentage_proportion = str(round(list_mvp[i] * 100, 2)) + "%"
+        percentage_proportion = str(round(list_mvp[i] * 100, 1)) + "%"
         json_results.append(
             {
                 "ticker": tickers[i],
@@ -31,30 +31,6 @@ def get_json_results(mvp, tickers):
             }
         )
     return json_results
-
-
-def monte_carlo_simulation(covariance_matrix, mean_daily_returns, n):
-
-    num_simulations = 2000
-    simulation_results = np.zeros((2 + n, num_simulations))
-
-    for i in range(num_simulations):
-
-        weights = np.array(np.random.random(n))
-
-        # ensuring weights to sum to 1
-        weights /= np.sum(weights)
-
-        portfolio_return = calc_annual_return(mean_daily_returns, weights)
-        portfolio_std_dev = calc_annual_volatility(weights, covariance_matrix)
-
-        simulation_results[0, i] = portfolio_return
-        simulation_results[1, i] = portfolio_std_dev
-
-        for j in range(n):
-            simulation_results[j + 2, i] = weights[j]
-
-    return simulation_results
 
 
 def find_mvp(tickers):
@@ -71,15 +47,21 @@ def find_mvp(tickers):
     mean_daily_returns = daily_hpr.mean()
     covariance_matrix = daily_hpr.cov()
 
-    simulation_results = monte_carlo_simulation(covariance_matrix, mean_daily_returns, n)
+    def objective(weights):
+        weights_transposed = weights.T
+        cov_matrix_times_weights = np.dot(covariance_matrix, weights)
+        daily_volatility = np.sqrt(np.dot(weights_transposed, cov_matrix_times_weights))
+        annual_volatility = daily_volatility * np.sqrt(252)
+        return annual_volatility
 
-    # convert results array to Pandas DataFrame
-    simulation_results_frame = pd.DataFrame(simulation_results.T, columns=['ret', 'stdev'] + tickers)
+    def constraint(weights):
+        return 1 - sum(weights)
 
-    # finding weights for the portfolio with minimum standard deviation
-    mvp = simulation_results_frame.iloc[simulation_results_frame['stdev'].idxmin()]
-    start_index = len(mvp) - n
+    start_weights = np.array(np.random.random(n))
+    sol = minimize(objective, start_weights, method="SLSQP", constraints={'type': 'eq', 'fun': constraint})
+    optimal_weights = sol.x
+    print(sol.x)
 
-    json_mvp_results = get_json_results(mvp[start_index:], tickers)
+    json_mvp_results = get_json_results(optimal_weights, tickers)
 
     return json_mvp_results

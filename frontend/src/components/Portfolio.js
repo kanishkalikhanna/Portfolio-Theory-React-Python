@@ -15,6 +15,7 @@ const Portfolio = ({props, portfolioStocks=[]}) => {
 
     function calculateMVP (e) {
         e.preventDefault()
+        setMVPStockProportions([])
         axios.post('http://localhost:5000/mvp', portfolioStocks)
         .then(res => 
             {
@@ -32,6 +33,7 @@ const Portfolio = ({props, portfolioStocks=[]}) => {
             if (data) {
                 return (
                     <div key={(data, index)} style = {portfolioStockStyle}>
+                        {/* add option to remove stock from portfolio */}
                         <h5>{data.ticker}</h5>
                     </div>	
                 )	
