@@ -17,8 +17,8 @@ def calc_annual_volatility(weights, covariance_matrix):
     return annual_volatility
 
 
-def get_json_results(mvp, tickers):
-    list_mvp = list(mvp)
+def get_json_results(optimal_weights, tickers):
+    list_mvp = list(optimal_weights)
     n = len(tickers)
     json_results = []
 
@@ -38,7 +38,7 @@ def find_mvp(tickers):
     tickers.sort()
 
     # downloading daily price data for each of the stocks in the portfolio
-    data = web.DataReader(tickers, data_source='yahoo', start='01/01/2020')['Adj Close']
+    data = web.DataReader(tickers, data_source='yahoo')['Adj Close']
 
     # convert daily stock prices into daily holding period returns
     daily_hpr = data.pct_change()

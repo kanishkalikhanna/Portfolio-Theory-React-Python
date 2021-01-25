@@ -325,9 +325,9 @@ const STOCK_DATA = [
        "description":"Becton Dickinson (BDX)"
     },
     {
-       "ticker":"BRK.B",
+       "ticker":"BRK-B",
        "security":"Berkshire Hathaway",
-       "description":"Berkshire Hathaway (BRK.B)"
+       "description":"Berkshire Hathaway (BRK-B)"
     },
     {
        "ticker":"BBY",
@@ -390,9 +390,9 @@ const STOCK_DATA = [
        "description":"Broadridge Financial Solutions (BR)"
     },
     {
-       "ticker":"BF.B",
+       "ticker":"BF-B",
        "security":"Brown-Forman Corp.",
-       "description":"Brown-Forman Corp. (BF.B)"
+       "description":"Brown-Forman Corp. (BF-B)"
     },
     {
        "ticker":"CHRW",

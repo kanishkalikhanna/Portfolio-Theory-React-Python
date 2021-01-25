@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import StockList from './StockList';
 import {STOCK_DATA} from '../data'
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Portfolio from './Portfolio';
 
-const Main = (props) => {
+const Main = () => {
   
   const [input, setInput] = useState('');
+  const [calculated, setCalculated] = useState(false)
   const [stockListDefault, setstockListDefault] = useState(STOCK_DATA);
   const [stockList, setstockList] = useState([]);
   const [portfolioStocks, setPortfolioStocks] = useState([]);
@@ -27,27 +27,35 @@ const Main = (props) => {
   }
 
   function handleAddingStock(data) {
-    
+
+    setCalculated(false)
+
     let updatedStockListDefault = stockListDefault.filter((item) => {return item.ticker !== data.ticker});
     setstockListDefault(updatedStockListDefault);
+
+    let updatedStockList = stockList.filter((item) => {return item.ticker !== data.ticker});
+    setstockList(updatedStockList)
 
     let updatedPortfolio = [ ...portfolioStocks, data]; 
     setPortfolioStocks(updatedPortfolio)
 
-    let updatedStockList = stockList.filter((item) => {return item.ticker !== data.ticker});
-
-    setstockList(updatedStockList)
     setInput('')
   }
 
 
   function handleDeletingStock(data) {
-    
+
+    setCalculated(false)
+
     let updatedStockListDefault =  [ ...stockListDefault, data]
     setstockListDefault(updatedStockListDefault);
+    
+    setstockList([]);
 
     let updatedPortfolio = portfolioStocks.filter((item) => {return item.ticker !== data.ticker});
     setPortfolioStocks(updatedPortfolio)
+
+    setInput('')
   }
 	
   return (
@@ -60,10 +68,19 @@ const Main = (props) => {
                     input={input} 
                     onChange={updateInput}
                 />
-                <StockList stockList={stockList} handleAddingStock = {handleAddingStock}/>
+                <StockList 
+                    stockList={stockList} 
+                    handleAddingStock = {handleAddingStock}
+                    calculated = {calculated}
+                />
             </div>
             <div style = {portfolioStyle}>
-                <Portfolio portfolioStocks = {portfolioStocks} handleDeletingStock = {handleDeletingStock} />
+                <Portfolio 
+                    portfolioStocks = {portfolioStocks} 
+                    handleDeletingStock = {handleDeletingStock} 
+                    calculated = {calculated}
+                    setCalculated = {setCalculated}
+                />
             </div>
 
         </div>

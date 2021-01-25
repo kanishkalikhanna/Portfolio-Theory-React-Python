@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Portfolio = (props) => {
 
-    const [calculatedMVP, setcalculatedMVP] = useState(false);
     const [MVPStockProportions, setMVPStockProportions] = useState([]);
     const MVPStyle = {marginTop: "7%"}
     const ButtonStyle = {marginTop: "12%",}
@@ -19,7 +18,7 @@ const Portfolio = (props) => {
         axios.post('http://localhost:5000/mvp', props.portfolioStocks)
         .then(res => 
             {
-                setcalculatedMVP(true)
+                props.setCalculated(true)
                 setMVPStockProportions(res.data)
             }
         );
@@ -51,7 +50,7 @@ const Portfolio = (props) => {
             </Button>
         }
         {
-            calculatedMVP && 
+            props.calculated && 
             <div style = {MVPStyle}>
                 <MVP MVPStockProportions = {MVPStockProportions} />
             </div>
