@@ -1,13 +1,21 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
-const StockList = ({stockList=[]}) => {
+const StockList = (props) => {
+  
+  const displayStockStyle = {margin: "5%", padding: "3%"}
   return (
     <div>
-        { stockList.map((data, index) => {
-            if (data && index < 25) {
+        { props.stockList.map((data, index) => {
+            if (data && index < 20) {
                 return (
-                    <div key={(data, index)}>
-                        <p>{data.description}</p>
+                    <div key={(data, index)} style = {displayStockStyle}>
+                        <span>
+                            {data.description}
+                        </span>
+                        <span style={{float: 'right'}}> 
+                            <Button onClick={(e) => props.handleAddingStock(data)}>  +  </Button>
+                        </span>
                     </div>	
                 )	
             }

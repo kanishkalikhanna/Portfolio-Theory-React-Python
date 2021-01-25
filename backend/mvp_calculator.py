@@ -60,7 +60,6 @@ def find_mvp(tickers):
     start_weights = np.array(np.random.random(n))
     sol = minimize(objective, start_weights, method="SLSQP", constraints={'type': 'eq', 'fun': constraint})
     optimal_weights = sol.x
-    print(sol.x)
 
     json_mvp_results = get_json_results(optimal_weights, tickers)
 

@@ -26,18 +26,28 @@ const Main = (props) => {
      setstockList(filtered);
   }
 
-  function handleAddingStock(e) {
+  function handleAddingStock(data) {
     
-    e.preventDefault();
-    
-    let updatedStockListDefault = stockListDefault.filter((item) => {return item.ticker !== stockList[0].ticker});
+    let updatedStockListDefault = stockListDefault.filter((item) => {return item.ticker !== data.ticker});
     setstockListDefault(updatedStockListDefault);
 
-    let updatedPortfolio = [ ...portfolioStocks, stockList[0]]; 
+    let updatedPortfolio = [ ...portfolioStocks, data]; 
     setPortfolioStocks(updatedPortfolio)
 
-    setstockList([])
+    let updatedStockList = stockList.filter((item) => {return item.ticker !== data.ticker});
+
+    setstockList(updatedStockList)
     setInput('')
+  }
+
+
+  function handleDeletingStock(data) {
+    
+    let updatedStockListDefault =  [ ...stockListDefault, data]
+    setstockListDefault(updatedStockListDefault);
+
+    let updatedPortfolio = portfolioStocks.filter((item) => {return item.ticker !== data.ticker});
+    setPortfolioStocks(updatedPortfolio)
   }
 	
   return (
@@ -50,17 +60,10 @@ const Main = (props) => {
                     input={input} 
                     onChange={updateInput}
                 />
-                <StockList stockList={stockList}/>
-                {stockList.length === 1 &&
-                    <div>
-                        <Button variant = "success" onClick={handleAddingStock}>
-                            Add {stockList[0].ticker} To Portfolio
-                        </Button>
-                    </div>
-                }
+                <StockList stockList={stockList} handleAddingStock = {handleAddingStock}/>
             </div>
             <div style = {portfolioStyle}>
-                <Portfolio portfolioStocks = {portfolioStocks}  />
+                <Portfolio portfolioStocks = {portfolioStocks} handleDeletingStock = {handleDeletingStock} />
             </div>
 
         </div>

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const MVP = ({MVPStockProportions=[]}) => {
+const MVP = (props) => {
   return (
       <div>
-        { MVPStockProportions.length > 0 &&
+        { props.MVPStockProportions.length > 0 &&
 
             <div>
-                <h4>Minimum Variance <br></br> Proportions Portfolio </h4>
-                { MVPStockProportions.map((data, index) => {
+                <h4>Minimum Variance <br></br>Portfolio Proportion</h4>
+                { props.MVPStockProportions.map((data, index) => {
                     if (data) {
                         return (
                             <div key={(data, index)}>
