@@ -20,7 +20,7 @@ const Portfolio = (props) => {
         
         type === "mvp" ? setPortfolioType("Minimum Variance") : setPortfolioType("Optimal Risky")
 
-        axios.post('http://localhost:5000/' + type, props.portfolioStocks)
+        axios.post('http://localhost:5000', props.portfolioStocks, { params: {type}})
         .then(res => 
             {
                 props.setCalculated(true)
