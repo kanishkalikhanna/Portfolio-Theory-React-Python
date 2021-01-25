@@ -2,24 +2,29 @@ import React from 'react';
 import {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import MVP from './MVP'; 
+import PortfolioProportions from './PortfolioProportions'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Portfolio = (props) => {
 
-    const [MVPStockProportions, setMVPStockProportions] = useState([]);
-    const MVPStyle = {marginTop: "7%"}
+    const [optimalPortfolioProportions, setoptimalPortfolioProportions] = useState([]);
+    const [portfolioType, setPortfolioType] = useState("")
+    const portfolioProportionsStyle = {marginTop: "7%"}
     const ButtonStyle = {marginTop: "12%",}
     const portfolioStockStyle = {margin: "3%", padding: "3%", color: "black"}
 
-    function calculateMVP (e) {
+    function calculateOptimalPortfolio (e, type) {
         e.preventDefault()
-        setMVPStockProportions([])
-        axios.post('http://localhost:5000/mvp', props.portfolioStocks)
+        props.setCalculated(false)
+        setoptimalPortfolioProportions([])
+        
+        type === "mvp" ? setPortfolioType("Minimum Variance") : setPortfolioType("Optimal Risky")
+
+        axios.post('http://localhost:5000/' + type, props.portfolioStocks)
         .then(res => 
             {
                 props.setCalculated(true)
-                setMVPStockProportions(res.data)
+                setoptimalPortfolioProportions(res.data)
             }
         );
     }
@@ -45,17 +50,23 @@ const Portfolio = (props) => {
         })}
         {
             props.portfolioStocks.length > 0 &&
-            <Button onClick = {calculateMVP} style = {ButtonStyle} >
-                Calculate Minimum <br></br>Variance Portfolio
-            </Button>
-        }
-        {
-            props.calculated && 
-            <div style = {MVPStyle}>
-                <MVP MVPStockProportions = {MVPStockProportions} />
+            <div>
+                <Button onClick = {(e) => calculateOptimalPortfolio(e, "mvp")} style = {ButtonStyle} >
+                    Calculate Minimum <br></br>Variance Portfolio
+                </Button>
+                <br></br>
+                <Button onClick = {(e) => calculateOptimalPortfolio(e, "orp")} style = {ButtonStyle} >
+                    Calculate Optimal <br></br>Risky Portfolio
+                </Button>
             </div>
         }
-
+        
+        {
+            props.calculated && 
+            <div style = {portfolioProportionsStyle}>
+                <PortfolioProportions optimalPortfolioProportions = {optimalPortfolioProportions} portfolioType = {portfolioType} />
+            </div>
+        }
     </div>
     );
 }

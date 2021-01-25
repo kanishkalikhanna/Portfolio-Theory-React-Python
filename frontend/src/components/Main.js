@@ -49,7 +49,7 @@ const Main = () => {
 
     let updatedStockListDefault =  [ ...stockListDefault, data]
     setstockListDefault(updatedStockListDefault);
-    
+
     setstockList([]);
 
     let updatedPortfolio = portfolioStocks.filter((item) => {return item.ticker !== data.ticker});
@@ -61,7 +61,7 @@ const Main = () => {
   return (
       <div>
         <br></br>
-        <h3>Search and add stocks to your portfolio</h3>
+        <h3>Search or add stocks to your portfolio</h3>
         <div style = {sideBySideRenderStyle}>
             <div style = {searchAndDisplayStocksStyle}>
                 <SearchBar

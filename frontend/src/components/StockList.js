@@ -13,7 +13,7 @@ const StockList = (props) => {
                             {data.description}
                         </span>
                         <span style={{float: 'right'}}> 
-                            <Button onClick={(e) => props.handleAddingStock(data)}>  +  </Button>
+                            <Button variant = 'success' onClick={(e) => props.handleAddingStock(data)}>  +  </Button>
                         </span>
                     </div>	
                 )	
