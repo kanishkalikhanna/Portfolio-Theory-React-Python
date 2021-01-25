@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import StockList from './StockList';
-import {STOCK_DATA} from '../data'
+import {STOCK_DATA} from '../data/data'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Portfolio from './Portfolio';
 
@@ -61,7 +61,7 @@ const Main = () => {
   return (
       <div>
         <br></br>
-        <h3>Search or add stocks to your portfolio</h3>
+        <h2>Search or add stocks to your portfolio</h2>
         <div style = {sideBySideRenderStyle}>
             <div style = {searchAndDisplayStocksStyle}>
                 <SearchBar

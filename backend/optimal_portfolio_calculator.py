@@ -36,7 +36,7 @@ def get_json_results(optimal_weights, tickers):
 def find_optimal_portfolio(data, portfolio_type):
 
     tickers = []
-    for item in data:
+    for item in list(data):
         tickers.append(item['ticker'])
 
     n = len(tickers)
@@ -48,8 +48,10 @@ def find_optimal_portfolio(data, portfolio_type):
     # convert daily stock prices into daily holding period returns
     daily_hpr = data.pct_change()
 
-    # calculate mean daily holding period returns and covariance matrix of daily returns between securities
+    # calculate mean daily holding period returns
     mean_daily_returns = daily_hpr.mean()
+
+    # calculate covariance matrix of daily returns between securities
     covariance_matrix = daily_hpr.cov()
 
     def objective_mvp(weights):
@@ -76,7 +78,5 @@ def find_optimal_portfolio(data, portfolio_type):
     optimal_weights = optimal_solution.x
 
     json_mvp_results = get_json_results(optimal_weights, tickers)
-
-    print(optimal_solution)
 
     return json_mvp_results

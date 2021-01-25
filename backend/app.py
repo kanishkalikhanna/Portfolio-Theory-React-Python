@@ -10,6 +10,7 @@ CORS(app)
 @app.route('/', methods=['POST'])
 # route for calculating optimal portfolio
 def optimal_portfolio():
-    data = list(request.get_json())
-    result = find_optimal_portfolio(data, request.args.get('type'))
+    data = request.get_json()
+    portfolio_type = request.args.get('type')
+    result = find_optimal_portfolio(data, portfolio_type)
     return dumps(result)
