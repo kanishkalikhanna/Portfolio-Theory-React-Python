@@ -48,9 +48,10 @@ const Main = () => {
     setCalculated(false)
 
     let updatedStockListDefault =  [ ...stockListDefault, data]
+    updatedStockListDefault.sort((a, b) => (a.description > b.description) ? 1 : -1)
     setstockListDefault(updatedStockListDefault);
 
-    setstockList([]);
+    setstockList(updatedStockListDefault);
 
     let updatedPortfolio = portfolioStocks.filter((item) => {return item.ticker !== data.ticker});
     setPortfolioStocks(updatedPortfolio)

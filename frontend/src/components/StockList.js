@@ -34,33 +34,3 @@ const StockList = (props) => {
 }
 
 export default StockList
-
-
-/*
-
-    <div>
-        <PagenatedList
-            list={props.stockList}
-            itemsPerPage={10}
-            renderList={(list) => (
-                <div>
-                {
-                    list.map((data, index) => {
-                    return (
-                    <div key={(data, index)} style = {displayStockStyle}>
-                        <span>
-                            {data.description}
-                        </span>
-                        <span style={{float: 'right'}}> 
-                            <Button variant = 'success' onClick={(e) => props.handleAddingStock(data)}>  +  </Button>
-                        </span>
-                    </div>	
-                    )
-
-                })}
-
-                </div>
-            )}
-        />
-    </div>
-*/

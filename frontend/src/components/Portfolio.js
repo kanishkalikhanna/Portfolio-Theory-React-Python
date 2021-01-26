@@ -58,6 +58,9 @@ const Portfolio = (props) => {
                 <Button onClick = {(e) => calculateOptimalPortfolio(e, "orp")} style = {ButtonStyle} >
                     Calculate Optimal <br></br>Risky Portfolio
                 </Button>
+
+                {/* Add option to allow for short sales */}
+
             </div>
         }
         
