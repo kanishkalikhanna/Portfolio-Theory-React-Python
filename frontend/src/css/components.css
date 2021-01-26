@@ -1,0 +1,47 @@
+.Portfolio {
+    margin: 6%;
+    margin-top: 4%
+}
+
+.SearchAndDisplayStocks {
+    margin-left: 10%;
+    margin-right: 10%
+}
+
+.SideBySideRender {
+    display: flex; 
+    flex-direction: row
+}
+
+.PortfolioProportions {
+    margin-top: 7%
+
+}
+.Button {
+    margin-top: 12%
+}
+
+.DeleteButton, .AddButton {
+    float: right
+}
+
+.PortfolioStock {
+    margin: 3%; 
+    padding: 3%;
+    color: black
+}
+
+  
+.SearchBar {
+    width: 25rem;  
+    background:#F2F1F9;
+    border: 2pt; 
+    padding:0.7rem; 
+    margin: 6%;
+    margin-top: 14%
+}
+
+.DisplayStock {
+    margin: 5%; 
+    padding: 3%
+}

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import StockList from './StockList';
 import {STOCK_DATA} from '../data/data'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Portfolio from './Portfolio';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/components.css';
 
 const Main = () => {
   
@@ -12,9 +13,6 @@ const Main = () => {
   const [stockListDefault, setstockListDefault] = useState(STOCK_DATA);
   const [stockList, setstockList] = useState([]);
   const [portfolioStocks, setPortfolioStocks] = useState([]);
-  const portfolioStyle = {margin: "6%", marginTop: "4%"}
-  const searchAndDisplayStocksStyle = {marginLeft: "10%", marginRight: "10%"}
-  const sideBySideRenderStyle = {display:"flex", flexDirection:"row"}
 
   const updateInput = async (input) => {
      
@@ -63,8 +61,8 @@ const Main = () => {
       <div>
         <br></br>
         <h2>Search or add stocks to your portfolio</h2>
-        <div style = {sideBySideRenderStyle}>
-            <div style = {searchAndDisplayStocksStyle}>
+        <div className = "SideBySideRender">
+            <div className = "SearchAndDisplayStocks">
                 <SearchBar
                     input={input} 
                     onChange={updateInput}
@@ -75,7 +73,7 @@ const Main = () => {
                     calculated = {calculated}
                 />
             </div>
-            <div style = {portfolioStyle}>
+            <div className = "Portfolio">
                 <Portfolio 
                     portfolioStocks = {portfolioStocks} 
                     handleDeletingStock = {handleDeletingStock} 

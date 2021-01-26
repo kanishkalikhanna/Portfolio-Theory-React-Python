@@ -4,14 +4,12 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import PortfolioProportions from './PortfolioProportions'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/components.css';
 
 const Portfolio = (props) => {
 
     const [optimalPortfolioProportions, setoptimalPortfolioProportions] = useState([]);
     const [portfolioType, setPortfolioType] = useState("")
-    const portfolioProportionsStyle = {marginTop: "7%"}
-    const ButtonStyle = {marginTop: "12%",}
-    const portfolioStockStyle = {margin: "3%", padding: "3%", color: "black"}
 
     function calculateOptimalPortfolio (e, type) {
         e.preventDefault()
@@ -36,8 +34,8 @@ const Portfolio = (props) => {
         { props.portfolioStocks.map((data, index) => {
             if (data) {
                 return (
-                    <div key={(data, index)} style = {portfolioStockStyle}>
-                        <span style={{float: 'right'}}> 
+                    <div key={(data, index)} className = "PortfolioStock">
+                        <span className = "DeleteButton"> 
                             <Button  variant="danger" onClick={(e) => props.handleDeletingStock(data)}>  -  </Button>
                         </span>
                         <span>
@@ -51,11 +49,11 @@ const Portfolio = (props) => {
         {
             props.portfolioStocks.length > 0 &&
             <div>
-                <Button onClick = {(e) => calculateOptimalPortfolio(e, "mvp")} style = {ButtonStyle} >
+                <Button onClick = {(e) => calculateOptimalPortfolio(e, "mvp")} className = "Button" >
                     Calculate Minimum <br></br>Variance Portfolio
                 </Button>
                 <br></br>
-                <Button onClick = {(e) => calculateOptimalPortfolio(e, "orp")} style = {ButtonStyle} >
+                <Button onClick = {(e) => calculateOptimalPortfolio(e, "orp")} className = "Button" >
                     Calculate Optimal <br></br>Risky Portfolio
                 </Button>
 
@@ -66,7 +64,7 @@ const Portfolio = (props) => {
         
         {
             props.calculated && 
-            <div style = {portfolioProportionsStyle}>
+            <div className = "PortfolioProportions">
                 <PortfolioProportions optimalPortfolioProportions = {optimalPortfolioProportions} portfolioType = {portfolioType} />
             </div>
         }
