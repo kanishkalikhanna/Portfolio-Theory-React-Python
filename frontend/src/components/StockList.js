@@ -9,7 +9,7 @@ const StockList = (props) => {
         <div>
             <PaginatedList
                 list={props.stockList}
-                itemsPerPage={5}
+                itemsPerPage={8}
                 renderList={(list) => (
                     <div>
                     {

@@ -17,8 +17,13 @@
     margin-top: 7%
 
 }
-.Button {
-    margin-top: 12%
+.MVPButton {
+    margin-top: 12%;
+}
+
+.ORPButton {
+    margin-top: 12%;
+    margin-bottom: 12%
 }
 
 .DeleteButton, .AddButton {
@@ -44,4 +49,13 @@
 .DisplayStock {
     margin: 5%; 
     padding: 3%
+}
+
+.CheckBox {
+    font-size: large;
+    padding-top: 1%;
+}
+
+input[type=checkbox] {
+    transform: scale(1.6);
 }

@@ -1,5 +1,5 @@
 from flask import Flask, request
-from optimal_portfolio_calculator import find_optimal_portfolio
+from optimal_portfolio_calculator import OptimalPortfolioCalculator
 from flask_cors import CORS
 from json import dumps
 
@@ -10,7 +10,6 @@ CORS(app)
 @app.route('/', methods=['POST'])
 # route for calculating optimal portfolio
 def optimal_portfolio():
-    data = request.get_json()
-    portfolio_type = request.args.get('type')
-    result = find_optimal_portfolio(data, portfolio_type)
+    optimal_portfolio_calculator = OptimalPortfolioCalculator(request)
+    result = optimal_portfolio_calculator.find_optimal_portfolio()
     return dumps(result)
