@@ -11,8 +11,8 @@ const Main = () => {
   
   const [input, setInput] = useState('');
   const [calculated, setCalculated] = useState(false)
-  const [stockListDefault, setstockListDefault] = useState(STOCK_DATA);
-  const [stockList, setstockList] = useState([]);
+  const [stockListDefault, setStockListDefault] = useState(STOCK_DATA);
+  const [stockList, setStockList] = useState([]);
   const [portfolioStocks, setPortfolioStocks] = useState([]);
 
   const updateInput = async (input) => {
@@ -22,7 +22,7 @@ const Main = () => {
      })
 
      setInput(input);
-     setstockList(filtered);
+     setStockList(filtered);
   }
 
   function handleAddingStock(data) {
@@ -30,10 +30,10 @@ const Main = () => {
     setCalculated(false)
 
     let updatedStockListDefault = stockListDefault.filter((item) => {return item.ticker !== data.ticker});
-    setstockListDefault(updatedStockListDefault);
+    setStockListDefault(updatedStockListDefault);
 
     let updatedStockList = stockList.filter((item) => {return item.ticker !== data.ticker});
-    setstockList(updatedStockList)
+    setStockList(updatedStockList)
 
     let updatedPortfolio = [ ...portfolioStocks, data]; 
     setPortfolioStocks(updatedPortfolio)
@@ -41,25 +41,41 @@ const Main = () => {
     setInput('')
   }
 
-  function createRandomPortfolio() {
-    console.log("will create random portfolio here")
-  }
-
-
   function handleDeletingStock(data) {
 
     setCalculated(false)
 
     let updatedStockListDefault =  [ ...stockListDefault, data]
     updatedStockListDefault.sort((a, b) => (a.description > b.description) ? 1 : -1)
-    setstockListDefault(updatedStockListDefault);
+    setStockListDefault(updatedStockListDefault);
 
-    setstockList(updatedStockListDefault);
+    setStockList(updatedStockListDefault);
 
     let updatedPortfolio = portfolioStocks.filter((item) => {return item.ticker !== data.ticker});
     setPortfolioStocks(updatedPortfolio)
 
     setInput('')
+  }
+
+
+  function createRandomPortfolio() {
+    
+    setCalculated(false)
+
+    const portfolioSize = 5
+    const shuffledStocks = STOCK_DATA.sort(() => 0.5 - Math.random());
+    const stockDataSize = STOCK_DATA.length
+    const randomPortfolio = shuffledStocks.slice(0, portfolioSize);
+
+    setPortfolioStocks(randomPortfolio)
+
+    let updatedStockListDefault = shuffledStocks.slice(portfolioSize, stockDataSize)
+    updatedStockListDefault.sort((a, b) => (a.description > b.description) ? 1 : -1)
+
+    setStockListDefault(updatedStockListDefault)
+    setStockList(updatedStockListDefault)
+    setInput('')
+
   }
 	
   return (

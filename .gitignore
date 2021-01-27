@@ -60,7 +60,7 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-features_to_add.txt
+tasks.txt
 
 # Unit test / coverage reports
 htmlcov/

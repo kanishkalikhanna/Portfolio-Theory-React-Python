@@ -21,7 +21,6 @@ def get_json_results(attributes, values):
     json_results = []
 
     for attribute, value in zip(attributes, values):
-        print(attribute, value)
         if attribute != "Sharpe Ratio":
             value = str(round(value * 100, 1)) + "%"
         else:
