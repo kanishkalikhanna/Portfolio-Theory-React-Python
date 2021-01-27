@@ -11,7 +11,11 @@ const PortfolioProportions = (props) => {
                     if (data) {
                         return (
                             <div key={(data, index)}>
-                                <p>{data.ticker} : {data.proportion}</p>
+                                {
+                                    data.attribute === "Expected Return" &&
+                                    <h4>Performance Statistics</h4>
+                                }
+                                <p>{data.attribute} : {data.value}</p>
                             </div>	
                         )	
                     }

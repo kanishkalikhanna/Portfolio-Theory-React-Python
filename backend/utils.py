@@ -1,4 +1,5 @@
 import numpy as np
+from json import dumps
 
 
 def calc_annual_expected_return(mean_daily_returns, weights):
@@ -15,17 +16,21 @@ def calc_annual_volatility(weights, covariance_matrix):
     return annual_volatility
 
 
-def get_json_results(optimal_weights, tickers):
-    list_mvp = list(optimal_weights)
-    n = len(tickers)
+def get_json_results(attributes, values):
+
     json_results = []
 
-    for i in range(n):
-        percentage_proportion = str(round(list_mvp[i] * 100, 1)) + "%"
+    for attribute, value in zip(attributes, values):
+        print(attribute, value)
+        if attribute != "Sharpe Ratio":
+            value = str(round(value * 100, 1)) + "%"
+        else:
+            value = round(value, 3)
+
         json_results.append(
             {
-                "ticker": tickers[i],
-                "proportion": percentage_proportion
+                "attribute": attribute,
+                "value": value
             }
         )
-    return json_results
+    return dumps(json_results)

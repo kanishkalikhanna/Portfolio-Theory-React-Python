@@ -12,4 +12,4 @@ CORS(app)
 def optimal_portfolio():
     optimal_portfolio_calculator = OptimalPortfolioCalculator(request)
     result = optimal_portfolio_calculator.find_optimal_portfolio()
-    return dumps(result)
+    return result

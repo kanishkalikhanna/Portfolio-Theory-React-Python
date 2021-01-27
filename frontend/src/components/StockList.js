@@ -15,14 +15,14 @@ const StockList = (props) => {
                     {
                         list.map((data, index) => {
                         return (
-                        <div key={(data, index)} className = "DisplayStock">
-                            <span>
-                                {data.description}
-                            </span>
-                            <span className = "AddButton"> 
-                                <Button variant = 'success' onClick={(e) => props.handleAddingStock(data)}>  +  </Button>
-                            </span>
-                        </div>	
+                            <div key={(data, index)} className = "DisplayStock">
+                                <span>
+                                    {data.description}
+                                </span>
+                                <span className = "AddButton"> 
+                                    <Button variant = 'success' onClick={(e) => props.handleAddingStock(data)}>  +  </Button>
+                                </span>
+                            </div>	
                         )
 
                     })}
