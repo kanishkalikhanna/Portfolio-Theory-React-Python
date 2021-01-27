@@ -2,20 +2,20 @@ import React from 'react';
 import {useState} from 'react'
 import { Form, Button} from "react-bootstrap";
 import axios from 'axios';
-import PortfolioProportions from './PortfolioProportions'; 
+import PortfolioAttributes from './PortfolioAttributes'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/components.css';
 
 const Portfolio = (props) => {
 
-    const [optimalPortfolioProportions, setOptimalPortfolioProportions] = useState([]);
+    const [optimalPortfolioAttributes, setOptimalPortfolioAttributes] = useState([]);
     const [portfolioType, setPortfolioType] = useState("mvp")
     const [shortSalesPossible, setShortSalesPossible] = useState("no")
 
     function calculateOptimalPortfolio (e, type) {
         e.preventDefault()
         props.setCalculated(false)
-        setOptimalPortfolioProportions([])
+        setOptimalPortfolioAttributes([])
         
         type === "mvp" ? setPortfolioType("Minimum Variance") : setPortfolioType("Optimal Risky")
 
@@ -23,14 +23,13 @@ const Portfolio = (props) => {
         .then(res => 
             {
                 props.setCalculated(true)
-                setOptimalPortfolioProportions(res.data)
+                setOptimalPortfolioAttributes(res.data)
             }
         );
     }
 
     function handleChangeCheckBox(e) {
-        console.log(e)
-        shortSalesPossible === "no" ? setShortSalesPossible("yes") : setShortSalesPossible("no")
+        e.target.checked ? setShortSalesPossible("yes") : setShortSalesPossible("no")
     }
 
     return (
@@ -52,6 +51,13 @@ const Portfolio = (props) => {
                 }
                 return null
             })}
+            <br></br>
+            <h6> Short Sales Allowed </h6>
+            <Form.Check 
+                type="checkbox" 
+                className = "CheckBox" 
+                onChange = {e => handleChangeCheckBox(e)}
+            />
             {
                 props.portfolioStocks.length > 0 &&
                 <div>
@@ -62,21 +68,13 @@ const Portfolio = (props) => {
                     <Button onClick = {(e) => calculateOptimalPortfolio(e, "orp")} className = "ORPButton" >
                         Calculate Optimal <br></br>Risky Portfolio
                     </Button>
-
-                    <h6> Short Sales Allowed </h6>
-                    <Form.Check 
-                        type="checkbox" 
-                        className = "CheckBox" 
-                        onChange = {handleChangeCheckBox}
-                    />
                 </div>
             }
-            
             {
                 props.calculated && 
-                <div className = "PortfolioProportions">
-                    <PortfolioProportions 
-                        optimalPortfolioProportions = {optimalPortfolioProportions} 
+                <div className = "PortfolioAttributes">
+                    <PortfolioAttributes 
+                        optimalPortfolioAttributes = {optimalPortfolioAttributes} 
                         portfolioType = {portfolioType} 
                     />
                 </div>

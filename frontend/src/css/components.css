@@ -13,7 +13,7 @@
     flex-direction: row
 }
 
-.PortfolioProportions {
+.PortfolioAttributes {
     margin-top: 7%
 
 }
@@ -30,12 +30,17 @@
     float: right
 }
 
+.RandomPortfolioButton {
+    margin-top: 3%;
+    color: rgb(255, 210, 127);
+    background-color: black;
+}
+
 .PortfolioStock {
     margin: 3%; 
     padding: 3%;
     color: black
 }
-
   
 .SearchBar {
     width: 25rem;  

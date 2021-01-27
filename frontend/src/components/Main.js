@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import StockList from './StockList';
 import {STOCK_DATA} from '../data/data'
 import Portfolio from './Portfolio';
+import {Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/components.css';
 
@@ -40,6 +41,10 @@ const Main = () => {
     setInput('')
   }
 
+  function createRandomPortfolio() {
+    console.log("will create random portfolio here")
+  }
+
 
   function handleDeletingStock(data) {
 
@@ -61,6 +66,11 @@ const Main = () => {
       <div>
         <br></br>
         <h2>Search or add stocks to your portfolio</h2>
+
+        <Button onClick = {createRandomPortfolio} className = "RandomPortfolioButton" variant="info">
+            Random <br></br> Portfolio
+        </Button>
+
         <div className = "SideBySideRender">
             <div className = "SearchAndDisplayStocks">
                 <SearchBar
