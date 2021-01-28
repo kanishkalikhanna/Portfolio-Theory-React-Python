@@ -11,7 +11,7 @@ def calc_annual_expected_return(mean_daily_returns, weights):
 def calc_annual_volatility(weights, covariance_matrix):
     weights_transposed = weights.T
     cov_matrix_times_weights = np.dot(covariance_matrix, weights)
-    daily_volatility = np.sqrt(np.dot(weights_transposed, cov_matrix_times_weights))
+    daily_volatility = np.sqrt(abs(np.dot(weights_transposed, cov_matrix_times_weights)))
     annual_volatility = daily_volatility * np.sqrt(252)
     return annual_volatility
 
